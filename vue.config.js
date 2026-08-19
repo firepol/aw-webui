@@ -89,6 +89,11 @@ export default {
   transpileDependencies: [
     // can be string or regex
     'vis-data',
-    'vis-timeline',
+    // vis-timeline excluded: no narrow browserslist target is configured here,
+    // so babel falls back to a broad legacy-browser default and hits its
+    // deoptimized code generator on vis-timeline-graph2d.js (>500KB), making
+    // the build pathologically slow. vis-timeline already ships a pre-built
+    // browser/ESM bundle; this only matters for very old browser support,
+    // which this local single-user dashboard doesn't need.
   ],
 };
